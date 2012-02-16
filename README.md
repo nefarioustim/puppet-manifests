@@ -3,7 +3,7 @@ Puppet manifests
 
 A small collection of Puppet manifests which I reuse alongside Vagrant when building development VM environments. I have stuck some basic annotation in the files, and I will endeavour to keep these up to date as I write more.
 
-Feel free to fork and add your own; I'm always interested in doing less work.
+Feel free to fork and add your own; I'm always interested in doing less work. At the moment this is a quick and dirty set of examples that I've hacked together in preparation for a blog post.
 
 Current manifests
 -----------------
