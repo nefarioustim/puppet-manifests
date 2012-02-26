@@ -1,6 +1,6 @@
 class nodejs {
     package { "python-software-properties":
-        ensure => latest
+        ensure => latest,
         before => Exec["addnoderepo"]
     }
     exec { "add-apt-repository ppa:chris-lea/node.js":
