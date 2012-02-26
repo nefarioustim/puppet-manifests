@@ -20,11 +20,6 @@ stage { "last": require => Stage["main"] }
 # A basic class which represents stuff for my pre phase
 
 class devbox {
-    exec { "add-apt-repository ppa:chris-lea/node.js":
-        path => "/usr/bin",
-        user => "root",
-        before => Exec["aptupdate"]
-    }
     exec { "aptitude update --quiet --assume-yes":
         alias => "aptupdate",
         path => "/usr/bin",
@@ -52,8 +47,7 @@ class devbox {
         ensure => latest,
     }
     package { "memcached":
-        ensure => latest,
-        before => Package["python-memcached"],
+        ensure => latest
     }
     file { "/home/vagrant/.bashrc":
         owner  => vagrant,
