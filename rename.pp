@@ -1,16 +1,21 @@
 define rename() {
-    host { "$hostname": ensure => absent }
-
-    host { "$fqdn": ensure => absent }
+    host { [
+            $::hostname,
+            $::fqdn
+        ]:
+        ensure => absent,
+        before => Host['newhost'],
+    }
 
     $alias = regsubst($name, '^([^.]*).*$', '\1')
 
-    host { "$name":
+    host { "newhost":
         ensure => present,
         ip     => $ipaddress,
-        alias  => $alias ? {
-            "$hostname" => undef,
-            default     => $alias
+        name  => "$title",
+        host_aliases  => $alias ? {
+            "$title" => undef,
+            default     => $alias,
         },
         before => Exec['hostname'],
     }
