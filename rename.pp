@@ -1,12 +1,4 @@
 define rename() {
-    host { [
-            $::hostname,
-            $::fqdn
-        ]:
-        ensure => absent,
-        before => Host['newhost'],
-    }
-
     $alias = regsubst($name, '^([^.]*).*$', '\1')
 
     host { "newhost":
