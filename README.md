@@ -8,7 +8,10 @@ Feel free to fork and add your own; I'm always interested in doing less work. At
 Current manifests
 -----------------
 
+* aptrepo.pp -- A manifest containing some defined types for adding new apt repositories.
 * base.pp -- An example base manifest which will import and include others.
+* line.pp -- A handy defined type for adding lines to files.
 * nginx.pp -- A simple manifest for setting up nginx.
 * node.pp -- A simple manifest for setting up NodeJS.
 * python.pp -- A simple manifest for setting up Python, and a bunch of useful related libraries.
+* rename.pp -- A handy manifest for updating your hostname.
