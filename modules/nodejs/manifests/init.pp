@@ -1,7 +1,7 @@
-import "aptrepo.pp"
-
 class chrisleappa {
-    pparepo { "chris-lea/node.js":
+    include apt
+
+    apt::pparepo { "chris-lea/node.js":
         apt_key => "C7917B12",
         ensure => present
     }
@@ -10,10 +10,7 @@ class chrisleappa {
 class nodejs {
     require chrisleappa
 
-    package { [
-            "nodejs",
-            "npm"
-        ]:
+    package { "nodejs":
         ensure => latest,
         require => Class['chrisleappa']
     }
