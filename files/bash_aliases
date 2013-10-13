@@ -1,9 +1,0 @@
-# I generally fill this with handy shortcuts for development. Here I've
-# included a bunch of commands for controlling Python tests and
-# coverage reports, and a shortcut to restart gunicorn.
-
-alias run-tests="cd /vagrant;coverage run --source=. -m unittest discover"
-alias cover-report="cd /vagrant;coverage report -m --omit=test*"
-alias clean-cover="cd /vagrant;coverage erase"
-alias clean-tests="clean-cover && run-tests && cover-report"
-alias gunicorn-restart="sudo /etc/init.d/supervisord stop;sudo /etc/init.d/supervisord start"
