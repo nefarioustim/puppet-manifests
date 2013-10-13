@@ -1,5 +1,7 @@
+class apt {}
+
 # Setup a PPA repo, where the name is "user/ppaname", e.g. "blueyed/ppa" ("ppa" being the default)
-define pparepo($apt_key = "", $ensure = present, $keyserver = "keyserver.ubuntu.com") {
+define apt::pparepo($apt_key = "", $ensure = present, $keyserver = "keyserver.ubuntu.com") {
     $name_for_file = regsubst($name, '/', '-', 'G')
 
     $file = "/etc/apt/sources.list.d/pparepo-${name_for_file}.list"
@@ -8,7 +10,7 @@ define pparepo($apt_key = "", $ensure = present, $keyserver = "keyserver.ubuntu.
     case $ensure {
         present: {
             File["$file"] {
-                content => "deb http://ppa.launchpad.net/$name/ubuntu oneiric main\n",
+                content => "deb http://ppa.launchpad.net/$name/ubuntu precise main\n",
                 notify => Exec["apt-update-${name}"]
             }
             File["$file"] { ensure => file }
