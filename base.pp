@@ -2,12 +2,6 @@
 # Example base manifest
 #----------------------------------------
 
-# Import the manifests you require
-
-import "python.pp"
-import "nginx.pp"
-import "node.pp"
-
 # Set up provisioning stages. I usually keep this to three:
 #
 # pre for apt configuration, apt update/upgrade, and base packages
@@ -20,58 +14,32 @@ stage { "last": require => Stage["main"] }
 # A basic class which represents stuff for my pre phase
 
 class devbox {
-    exec { "add-apt-repository ppa:chris-lea/node.js":
-        alias => "addnoderepo",
-        path => "/usr/bin",
-        user => "root",
-        before => Exec["aptupdate"]
+    hostname { "update-hostname":
+        hostname => "magento.nefariousdesigns.co.uk"
     }
-    exec { "aptitude update --quiet --assume-yes":
-        alias => "aptupdate",
-        path => "/usr/bin",
+    exec { "aptupdate":
+        command => "aptitude update --quiet --assume-yes",
         user => "root",
         timeout => 0,
-        before => Package["build-essential"],
-    }
-    user { "vagrant":
-        groups => [
-            "sudo"
-        ]
     }
     group { "puppet":
         ensure => present,
     }
     package { "build-essential":
         ensure => latest,
-        before => Package["vim"],
     }
     package { [
             "python-software-properties",
+            "tmux",
             "vim",
-            "aptitude"
+            "curl",
+            "git",
+            "git-flow",
+            "aptitude",
+            "memcached",
         ]:
         ensure => latest,
-    }
-    package { "memcached":
-        ensure => latest
-    }
-    file { "/home/vagrant/.bashrc":
-        owner  => vagrant,
-        group  => vagrant,
-        mode   => 644,
-        source => "puppet:////vagrant/puppet/files/bashrc",
-    }
-    file { "/home/vagrant/.bash_aliases":
-        owner  => vagrant,
-        group  => vagrant,
-        mode   => 644,
-        source => "puppet:////vagrant/puppet/files/bash_aliases",
-    }
-    file { "/etc/motd":
-        owner  => root,
-        group  => root,
-        mode   => 644,
-        source => "puppet:////vagrant/puppet/files/motd",
+        require => Exec["aptupdate"]
     }
 }
 
@@ -79,8 +47,21 @@ class devbox {
 
 class { "devbox": stage => pre }
 
-# Include imported classes (import doesn't do this automatically)
+# Set-up a vagrant user using the user module
 
-include python
-include nginx
+if $virtual == 'virtualbox' {
+    class { "user":
+        stage => pre,
+        username => 'vagrant',
+        groupname => 'vagrant'
+    }
+}
+
+include nginx # Include a basic module
+
+class { "mysql": root_password => "monkeys" } # Include a parameterised class
+
+class { "php": db_binding => "mysql" }
+include php::composer
+
 include nodejs
