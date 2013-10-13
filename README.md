@@ -15,19 +15,57 @@ In production, this often means using third-party modules added to your repo usi
 Summary of modules
 -----
 
-* apt — A lightweight alternative to the heavier [PuppetLabs apt module][3]. Allows you to add PPA sources to your sources.list.
-* hostname — Allows you to update the hostname of your server.
-* libxml — Installs the basic libxml packages.
-* logrotate — Basic class and defined type for setting up logrotate on your logs.
-* mysql — Parameterised class to install MySQL, set the root password, and create a vagrant user.
-* nginx — Install nginx, provision nginx.conf and upstream.conf, and remove the default site. Will add virtual host support soon.
-* nodejs — Install Node from the official PPA.
-* npm-provider — A Puppet npm provider, allowing you to install packages with npm.
-* php — Install the latest PHP5 from a PPA, and use an optional parameter to define which DB bindings to install.
-* postgres — Installs PostGreSQL, recreates the primary cluster to use UTF-8, and adds defined types for adding roles and DBs.
-* python — Basic set up for Python. Expects you to use virtualenv and pip to provision project specific requirements.
-* ruby — Basic set up for Ruby and Gems. Needs to be updated to correctly depend on bundler to handle Gem provisioning.
-* user — Parameterised class to set up a user with a nice environment and profile.
+*   ### apt
+
+    A lightweight alternative to the heavier [PuppetLabs apt module][3]. Allows you to add PPA sources to your sources.list.
+
+*   ### hostname
+
+    Allows you to update the hostname of your server.
+
+*   ### libxml
+
+    Installs the basic libxml packages.
+
+*   ### logrotate
+
+    Basic class and defined type for setting up logrotate on your logs.
+
+*   ### mysql
+
+    Parameterised class to install MySQL, set the root password, and create a vagrant user.
+
+*   ### nginx
+
+    Install nginx, provision nginx.conf and upstream.conf, and remove the default site. Will add virtual host support soon.
+
+*   ### nodejs
+
+    Install Node from the official PPA.
+
+*   ### npm-provider
+
+    A Puppet npm provider, allowing you to install packages with npm.
+
+*   ### php
+
+    Install the latest PHP5 from a PPA, and use an optional parameter to define which DB bindings to install.
+
+*   ### postgres
+
+    Installs PostGreSQL, recreates the primary cluster to use UTF-8, and adds defined types for adding roles and DBs.
+
+*   ### python
+
+    Basic set up for Python. Expects you to use virtualenv and pip to provision project specific requirements.
+
+*   ### ruby
+
+    Basic set up for Ruby and Gems. Needs to be updated to correctly depend on bundler to handle Gem provisioning.
+
+*   ### user
+
+    Parameterised class to set up a user with a nice environment and profile.
 
 [1]: https://github.com/rodjek/librarian-puppet
 [2]: https://github.com/puppetlabs
