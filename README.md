@@ -15,55 +15,55 @@ In production, this often means using third-party modules added to your repo usi
 Summary of modules
 -----
 
-*   ### apt
+*   __apt__
 
     A lightweight alternative to the heavier [PuppetLabs apt module][3]. Allows you to add PPA sources to your sources.list.
 
-*   ### hostname
+*   __hostname__
 
     Allows you to update the hostname of your server.
 
-*   ### libxml
+*   __libxml__
 
     Installs the basic libxml packages.
 
-*   ### logrotate
+*   __logrotate__
 
     Basic class and defined type for setting up logrotate on your logs.
 
-*   ### mysql
+*   __mysql__
 
     Parameterised class to install MySQL, set the root password, and create a vagrant user.
 
-*   ### nginx
+*   __nginx__
 
     Install nginx, provision nginx.conf and upstream.conf, and remove the default site. Will add virtual host support soon.
 
-*   ### nodejs
+*   __nodejs__
 
     Install Node from the official PPA.
 
-*   ### npm-provider
+*   __npm-provider__
 
     A Puppet npm provider, allowing you to install packages with npm.
 
-*   ### php
+*   __php__
 
     Install the latest PHP5 from a PPA, and use an optional parameter to define which DB bindings to install.
 
-*   ### postgres
+*   __postgres__
 
     Installs PostGreSQL, recreates the primary cluster to use UTF-8, and adds defined types for adding roles and DBs.
 
-*   ### python
+*   __python__
 
     Basic set up for Python. Expects you to use virtualenv and pip to provision project specific requirements.
 
-*   ### ruby
+*   __ruby__
 
     Basic set up for Ruby and Gems. Needs to be updated to correctly depend on bundler to handle Gem provisioning.
 
-*   ### user
+*   __user__
 
     Parameterised class to set up a user with a nice environment and profile.
 
