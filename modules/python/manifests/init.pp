@@ -1,4 +1,4 @@
-class python {
+class python($db_binding = false) {
     package { [
             'python',
             'python-dev',
@@ -9,6 +9,23 @@ class python {
     exec { 'install-pip':
         command => 'easy_install pip',
         require => Package['python-setuptools'],
+    }
+
+    case $db_binding {
+        "mysql": {
+            package { "MySQL-python":
+                ensure => latest,
+                provider => pip,
+                require => Exec['install-pip'],
+            }
+        }
+        "postgresql": {
+            package { "psycopg2":
+                ensure => latest,
+                provider => pip,
+                require => Exec['install-pip'],
+            }
+        }
     }
 }
 
