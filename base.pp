@@ -8,6 +8,8 @@
 # main for most of the work
 # last for final stage things like creating DB schemas
 
+$project_name = 'my-project'  # Used as a directory reference in user module
+
 stage { "pre": before => Stage["main"] }
 stage { "last": require => Stage["main"] }
 
