@@ -44,7 +44,7 @@ class php($db_binding = false) {
 }
 
 class php::composer {
-    exec { "getcomposer":
+    exec { "get-composer":
         command => "curl -sS https://getcomposer.org/installer | php && mv composer.phar /usr/local/bin/composer",
         user => "root",
         creates => "/usr/local/bin/composer",
@@ -52,5 +52,11 @@ class php::composer {
             Class["php"],
             Package["curl"]
         ],
+    }
+
+    file { "set-composer-execute-permissions":
+        path => "/usr/local/bin/composer",
+        mode => 755,
+        require => Exec["get-composer"]
     }
 }
