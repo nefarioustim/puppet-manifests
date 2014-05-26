@@ -1,3 +1,13 @@
+# Bring in environment variables and aliases no matter what.
+# This allows us to use them from "vagrant ssh -c 'some-command'"
+if [ -f ~/.environment ]; then
+    . ~/.environment
+fi
+
+if [ -f ~/.bash_aliases ]; then
+    . ~/.bash_aliases
+fi
+
 # Almost vanilla .bashrc. Stolen from Ubuntu with some minor changes
 # to my preference.
 
