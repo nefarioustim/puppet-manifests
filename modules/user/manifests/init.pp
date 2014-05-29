@@ -1,4 +1,4 @@
-class user($username, $groupname) {
+class user($projectpath, $username, $groupname) {
     group { $groupname:
         ensure => present,
     }
