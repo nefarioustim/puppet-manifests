@@ -5,4 +5,13 @@ class python {
         ]:
         ensure => latest,
     }
+    package { [
+            'pytest',
+            'pytest-cov',
+            'mock'
+        ]:
+        ensure => latest,
+        provider => pip,
+        require => Package['python-pip'],
+    }
 }
