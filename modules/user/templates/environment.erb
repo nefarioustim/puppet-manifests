@@ -1,4 +1,5 @@
 export PROJECT="<%= @projectpath %>"
-export PATH="$PROJECT/bin:$PROJECT/vendor/bin:~/.composer/vendor/bin:$PATH"
-export PYTHONPATH="$PROJECT:$PYTHONPATH"
+export VENV="$PROJECT/venv"
 export WORKON_HOME="$PROJECT/venvs"
+export PATH="$PROJECT/bin:$VENV/bin:$PROJECT/vendor/bin:~/.composer/vendor/bin:$PATH"
+export PYTHONPATH="$PROJECT/projects:$PYTHONPATH"
