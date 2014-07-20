@@ -1,4 +1,9 @@
 class core-env {
+    exec { "aptupdate":
+        command => "aptitude update --quiet --assume-yes",
+        user => "root",
+        timeout => 0,
+    }
     package { [
             "python-software-properties",
             "python-pip",
@@ -6,6 +11,7 @@ class core-env {
             "vim",
             "curl",
         ]:
-        ensure => latest
+        ensure => latest,
+        require => Exec["aptupdate"]
     }
 }
