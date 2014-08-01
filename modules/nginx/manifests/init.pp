@@ -1,4 +1,4 @@
-class nginx {
+class nginx($upstream) {
     package { "nginx":
         ensure      => latest,
         require     => Anchor['nginx::apt_repo'],
