@@ -7,8 +7,8 @@ class nginx {
     anchor { 'nginx::apt_repo' : }
 
     apt::source { 'nginx':
-        location    => "http://nginx.org/packages/mainline/ubuntu/",
-        release     => '${lsbdistcodename}',
+        location    => 'http://nginx.org/packages/mainline/ubuntu/',
+        release     => $lsbdistcodename,
         repos       => 'nginx',
         key         => '7BD9BF62',
         key_source  => 'http://nginx.org/keys/nginx_signing.key',
