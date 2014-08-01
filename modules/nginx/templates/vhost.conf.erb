@@ -1,0 +1,9 @@
+server {
+    listen          80;
+
+    root            <%= @location %>/var;
+
+    location / {
+        autoindex on;
+    }
+}

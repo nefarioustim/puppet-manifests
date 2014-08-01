@@ -1,38 +1,32 @@
 class nginx {
-    package { "nginx":
-        ensure => latest,
-    }
-
-    file { "populate-nginx-conf":
-        path => "/etc/nginx/nginx.conf",
+    file { "/etc/nginx/nginx.conf":
         owner  => root,
         group  => root,
         mode   => 644,
         content => template("nginx/nginx.conf.erb"),
-        notify => Service["nginx"],
-        require => Package["nginx"],
+        notify => Service["nginx"]
     }
 
-    file { "populate-upstream-conf":
-        path => "/etc/nginx/conf.d/upstream.conf",
+    file { "/etc/nginx/conf.d/upstream.conf":
         owner  => root,
         group  => root,
         mode   => 644,
         content => template("nginx/upstream.conf.erb"),
-        notify => Service["nginx"],
-        require => Package["nginx"],
+        notify => Service["nginx"]
     }
 
-    file { "remove-default-site":
-        path => "/etc/nginx/sites-enabled/default",
+    file { "/etc/nginx/conf.d/default.conf":
         ensure => absent,
-        notify => Service["nginx"],
-        require => Package["nginx"],
+        notify => Service["nginx"]
+    }
+
+    file { "/etc/nginx/conf.d/example_ssl.conf":
+        ensure => absent,
+        notify => Service["nginx"]
     }
 
     service { "nginx":
         ensure => running,
-        hasrestart => true,
-        require => Package["nginx"],
+        hasrestart => true
     }
 }
