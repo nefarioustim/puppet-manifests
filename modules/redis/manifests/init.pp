@@ -1,4 +1,6 @@
 class redis {
+    class { 'apt':; }
+
     apt::ppa { "ppa:rwky/redis": }
 
     package {'redis-server':
