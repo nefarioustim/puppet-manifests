@@ -3,7 +3,7 @@ class redis {
 
     package {'redis-server':
         ensure => latest,
-        require => Apt::Ppa["rwky/redis"],
+        require => Apt::Ppa["ppa:rwky/redis"],
     }
 
     file {'/etc/redis/redis.conf':
