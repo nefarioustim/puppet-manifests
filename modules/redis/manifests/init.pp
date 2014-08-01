@@ -1,12 +1,9 @@
 class redis {
-    apt::pparepo { "rwky/redis":
-        apt_key => "5862E31D",
-        ensure => present
-    }
+    apt::ppa { "ppa:rwky/redis": }
 
     package {'redis-server':
         ensure => latest,
-        require => Apt::Pparepo["rwky/redis"],
+        require => Apt::Ppa["rwky/redis"],
     }
 
     file {'/etc/redis/redis.conf':
