@@ -1,7 +1,8 @@
 class mysql($root_password) {
     package { [
             "mysql-server",
-            "mysql-client"
+            "mysql-client",
+            "libmysqlclient-dev"
         ]:
         ensure => latest
     }
