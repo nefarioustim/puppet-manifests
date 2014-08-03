@@ -1,15 +1,6 @@
 class ruby {
-    package { [
-            "ruby1.9.1",
-            "rubygems"
-        ]:
-        ensure => latest
-    }
-    package { [
-            "compass"
-        ]:
+    package { "bundler":
         ensure => latest,
-        provider => "gem",
-        require => Package["rubygems"]
+        provider => "gem"
     }
 }
