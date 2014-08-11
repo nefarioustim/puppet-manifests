@@ -1,4 +1,4 @@
-class mysql::user($user, $pass) {
+define mysql::user($user, $pass) {
     exec { "create-user-all":
         unless => "mysql -uroot -p${mysql::root_password} mysql -e \"SELECT user, host FROM user WHERE user='${user}' AND host='%';\"",
         path => "/bin:/usr/bin",
