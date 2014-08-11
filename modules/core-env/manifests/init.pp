@@ -5,6 +5,7 @@ class core-env {
         timeout => 0,
     }
     package { [
+            "libffi-dev",
             "python-software-properties",
             "python-pip",
             "tmux",
