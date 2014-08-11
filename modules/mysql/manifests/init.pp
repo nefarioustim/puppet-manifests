@@ -21,20 +21,6 @@ class mysql($root_password) {
         command => "mysqladmin -uroot password ${root_password}",
     }
 
-    exec { "create-vagrant-user-all":
-      unless => "mysqladmin -uvagrant -pvagrant status",
-      path => "/bin:/usr/bin",
-      command => "mysql -uroot -p${root_password} -e \"CREATE USER vagrant@'%' IDENTIFIED BY 'vagrant'; GRANT ALL ON *.* TO vagrant@'%' WITH GRANT OPTION;\"",
-      require => Service["mysql"],
-    }
-
-    exec { "create-vagrant-user-localhost":
-      unless => "mysqladmin -uvagrant -pvagrant status",
-      path => "/bin:/usr/bin",
-      command => "mysql -uroot -p${root_password} -e \"CREATE USER vagrant@'localhost' IDENTIFIED BY 'vagrant'; GRANT ALL ON *.* TO vagrant@'localhost' WITH GRANT OPTION;\"",
-      require => Service["mysql"],
-    }
-
     service { "mysql":
         require => [ Package["mysql-server"], Exec["set-root-password"] ],
         hasstatus => true,
