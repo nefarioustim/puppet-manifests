@@ -1,4 +1,4 @@
-class user($projectpath, $username, $groupname) {
+class user($name = $username, $groupname, $projectpath) {
     group { $groupname:
         ensure => present,
     }
@@ -8,7 +8,14 @@ class user($projectpath, $username, $groupname) {
             "sudo",
             $groupname
         ],
+        shell => "/bin/bash",
+        home => "/home/$username",
         require => Group[$groupname]
+    }
+    exec { "$username homedir":
+        command => "/bin/cp -R /etc/skel /home/$username; /bin/chown -R $username:$groupname /home/$username",
+        creates => "/home/$username",
+        require => User[$username],
     }
     user { "www-data":
         ensure => present,
@@ -20,7 +27,7 @@ class user($projectpath, $username, $groupname) {
         group  => $groupname,
         mode   => 644,
         content => template("user/bashrc.erb"),
-        require => User[$username]
+        require => Exec["$username homedir"]
     }
     file { "/home/${username}/.inputrc":
         ensure => present,
@@ -28,7 +35,7 @@ class user($projectpath, $username, $groupname) {
         group  => $groupname,
         mode   => 644,
         content => template("user/inputrc.erb"),
-        require => User[$username]
+        require => Exec["$username homedir"]
     }
     file { "/home/${username}/.tmux.conf":
         ensure => present,
@@ -36,7 +43,7 @@ class user($projectpath, $username, $groupname) {
         group  => $groupname,
         mode   => 644,
         content => template("user/tmux.conf.erb"),
-        require => User[$username]
+        require => Exec["$username homedir"]
     }
     file { "/home/${username}/.environment":
         ensure => present,
@@ -44,7 +51,7 @@ class user($projectpath, $username, $groupname) {
         group  => $groupname,
         mode   => 644,
         content => template("user/environment.erb"),
-        require => User[$username]
+        require => Exec["$username homedir"]
     }
     file { "/home/${username}/.bash_aliases":
         ensure => present,
@@ -52,7 +59,7 @@ class user($projectpath, $username, $groupname) {
         group  => $groupname,
         mode   => 644,
         content => template("user/bash_aliases.erb"),
-        require => User[$username]
+        require => Exec["$username homedir"]
     }
     file { "aws-config-path":
         path   => "/home/${username}/.aws",
@@ -60,12 +67,7 @@ class user($projectpath, $username, $groupname) {
         owner  => $username,
         group  => $groupname,
         mode   => 644,
-        require => User[$username]
-    }
-    file { "aws-config-path-root":
-        path   => "/root/.aws",
-        ensure => directory,
-        mode   => 644,
+        require => Exec["$username homedir"]
     }
     file { "aws-config":
         path   => "/home/${username}/.aws/config",
@@ -75,15 +77,8 @@ class user($projectpath, $username, $groupname) {
         mode   => 644,
         content => template("user/awsconfig.erb"),
         require => [
-            User[$username],
+            Exec["$username homedir"],
             File["aws-config-path"]
         ]
-    }
-    file { "aws-config-root":
-        path   => "/root/.aws/config",
-        ensure => present,
-        mode   => 644,
-        content => template("user/awsconfig.erb"),
-        require => File["aws-config-path"]
     }
 }
