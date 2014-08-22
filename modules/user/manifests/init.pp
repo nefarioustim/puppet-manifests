@@ -27,6 +27,7 @@ class user($username = $name, $groupname, $projectpath) {
         owner  => $username,
         group  => $groupname,
         mode   => 700,
+        require => Exec["$username homedir"]
     }
     file { "/home/${username}/.bashrc":
         ensure => present,
