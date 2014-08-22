@@ -17,9 +17,16 @@ class user($username = $name, $groupname, $projectpath) {
         creates => "/home/$username",
         require => User[$username],
     }
+
     user { "www-data":
         ensure => present,
         groups => [$groupname],
+    }
+    file { "/home/${username}/.ssh":
+        ensure => "directory",
+        owner  => $username,
+        group  => $groupname,
+        mode   => 700,
     }
     file { "/home/${username}/.bashrc":
         ensure => present,
