@@ -4,7 +4,7 @@ class exim {
     }
 
     file { "/etc/exim4/update-exim4.conf.conf":
-        content => template("exim4/update-exim4.conf.conf.erb"),
+        content => template("exim/update-exim4.conf.conf.erb"),
         require => Package["exim4"]
     }
 
