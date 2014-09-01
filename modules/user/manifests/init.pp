@@ -1,4 +1,4 @@
-class user($username = $name, $groupname, $projectpath, $envvars = undef) {
+class user($username = $name, $groupname, $projectpath, $envvars = []) {
     group { $groupname:
         ensure => present,
     }
