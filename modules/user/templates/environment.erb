@@ -2,6 +2,8 @@ export PROJECT="<%= @projectpath %>"
 export VENV="$PROJECT/venv"
 export PATH="$PROJECT/bin:$VENV/bin:$PROJECT/vendor/bin:~/.composer/vendor/bin:$PATH"
 export PYTHONPATH="$PROJECT/projects:$PROJECT:$PYTHONPATH"
+<% if envvars -%>
 <% @envvars.each do |env| -%>
 export <%= env %>
+<% end -%>
 <% end -%>
