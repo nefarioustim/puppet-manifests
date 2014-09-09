@@ -1,9 +1,11 @@
-define hostname($hostname = $title) {
-    host { "newhost":
-        ensure => present,
-        ip     => $ipaddress,
-        name  => $hostname,
-        notify => Service['hostname'],
+define hostname($name, $domain) {
+    $hostname = "${name}.${domain}"
+
+    host { "${hostname}":
+        ensure  => present,
+        ip      => $ipaddress,
+        name    => $hostname,
+        notify  => Service['hostname'],
     }
 
     file { '/etc/mailname':
@@ -11,7 +13,7 @@ define hostname($hostname = $title) {
         owner   => 'root',
         group   => 'root',
         mode    => 644,
-        content => "${hostname}\n",
+        content => "${domain}\n",
     }
 
     file { '/etc/hostname':
