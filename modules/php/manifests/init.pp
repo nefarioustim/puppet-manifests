@@ -2,7 +2,6 @@ class ondrejppa {
     include apt
 
     apt::ppa { "ppa:ondrej/php5":
-        apt_key => "E5267A6C",
         ensure => present
     }
 }
