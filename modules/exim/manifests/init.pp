@@ -19,7 +19,7 @@ class exim {
     }
 
     file { "/etc/exim4/exim4.conf.localmacros":
-        content => template("exim4.conf.localmacros.erb"),
+        content => template("exim/exim4.conf.localmacros.erb"),
         require => Package["exim4"]
     }
 
