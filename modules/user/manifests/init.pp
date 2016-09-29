@@ -26,14 +26,14 @@ class user($username = $name, $groupname, $projectpath, $envvars = []) {
         ensure => "directory",
         owner  => $username,
         group  => $groupname,
-        mode   => 700,
+        mode   => "0700",
         require => Exec["$username homedir"]
     }
     file { "/home/${username}/.bashrc":
         ensure => present,
         owner  => $username,
         group  => $groupname,
-        mode   => 644,
+        mode   => "0644",
         content => template("user/bashrc.erb"),
         require => Exec["$username homedir"]
     }
@@ -41,7 +41,7 @@ class user($username = $name, $groupname, $projectpath, $envvars = []) {
         ensure => present,
         owner  => $username,
         group  => $groupname,
-        mode   => 644,
+        mode   => "0644",
         content => template("user/inputrc.erb"),
         require => Exec["$username homedir"]
     }
@@ -49,7 +49,7 @@ class user($username = $name, $groupname, $projectpath, $envvars = []) {
         ensure => present,
         owner  => $username,
         group  => $groupname,
-        mode   => 644,
+        mode   => "0644",
         content => template("user/tmux.conf.erb"),
         require => Exec["$username homedir"]
     }
@@ -57,7 +57,7 @@ class user($username = $name, $groupname, $projectpath, $envvars = []) {
         ensure => present,
         owner  => $username,
         group  => $groupname,
-        mode   => 644,
+        mode   => "0644",
         content => template("user/environment.erb"),
         require => Exec["$username homedir"]
     }
@@ -65,7 +65,7 @@ class user($username = $name, $groupname, $projectpath, $envvars = []) {
         ensure => present,
         owner  => $username,
         group  => $groupname,
-        mode   => 644,
+        mode   => "0644",
         content => template("user/bash_aliases.erb"),
         require => Exec["$username homedir"]
     }
@@ -74,7 +74,7 @@ class user($username = $name, $groupname, $projectpath, $envvars = []) {
         ensure => directory,
         owner  => $username,
         group  => $groupname,
-        mode   => 644,
+        mode   => "0644",
         require => Exec["$username homedir"]
     }
     file { "aws-config":
@@ -82,7 +82,7 @@ class user($username = $name, $groupname, $projectpath, $envvars = []) {
         ensure => present,
         owner  => $username,
         group  => $groupname,
-        mode   => 644,
+        mode   => "0644",
         content => template("user/awsconfig.erb"),
         require => [
             Exec["$username homedir"],
