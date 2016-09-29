@@ -26,7 +26,7 @@ class nginx($upstream) {
     file { "/etc/nginx/nginx.conf":
         owner       => root,
         group       => root,
-        mode        => 644,
+        mode        => "0644",
         content     => template("nginx/nginx.conf.erb"),
         notify      => Service["nginx"],
         require     => Package["nginx"]
@@ -35,7 +35,7 @@ class nginx($upstream) {
     file { "/etc/nginx/conf.d/upstream.conf":
         owner       => root,
         group       => root,
-        mode        => 644,
+        mode        => "0644",
         content     => template("nginx/upstream.conf.erb"),
         notify      => Service["nginx"],
         require     => Package["nginx"]

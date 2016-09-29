@@ -11,7 +11,7 @@ class logrotate::base {
         ensure => directory,
         owner => root,
         group => root,
-        mode => 755,
+        mode => "0755",
         require => Package[logrotate],
     }
 }
@@ -23,7 +23,7 @@ define logrotate::file( $log, $options, $postrotate = "NONE" ) {
     file { "/etc/logrotate.d/${name}":
         owner => root,
         group => root,
-        mode => 644,
+        mode => "0644",
         content => template("logrotate/logrotate.tpl"),
         require => File["/etc/logrotate.d"],
     }

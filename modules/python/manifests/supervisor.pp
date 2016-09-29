@@ -8,18 +8,18 @@ class python::supervisor {
         ensure => directory,
         owner => root,
         group => root,
-        mode => 655,
+        mode => "0655",
     }
     file { "/etc/supervisord.conf":
         owner  => root,
         group  => root,
-        mode   => 644,
+        mode   => "0644",
         source => "puppet:///modules/python/supervisord.conf",
     }
     file { "/etc/init.d/supervisord":
         owner  => root,
         group  => root,
-        mode   => 655,
+        mode   => "0655",
         source => "puppet:///modules/python/supervisord.initd",
     }
     service { "supervisord":

@@ -3,7 +3,7 @@ class nginx::vhost($hostname, $location, $htpasswd = false) {
         path => "/etc/nginx/conf.d/${hostname}.conf",
         owner  => root,
         group  => root,
-        mode   => 644,
+        mode   => "0644",
         content => template("nginx/vhost.conf.erb"),
         notify => Service["nginx"],
     }

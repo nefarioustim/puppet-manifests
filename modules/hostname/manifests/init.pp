@@ -12,7 +12,7 @@ define hostname($name, $domain) {
         ensure  => present,
         owner   => 'root',
         group   => 'root',
-        mode    => 644,
+        mode    => "0644",
         content => "${domain}\n",
     }
 
@@ -20,7 +20,7 @@ define hostname($name, $domain) {
         ensure  => present,
         owner   => 'root',
         group   => 'root',
-        mode    => 644,
+        mode    => "0644",
         content => "${hostname}\n",
         notify => Service['hostname'],
     }

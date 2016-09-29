@@ -55,7 +55,7 @@ class php::composer {
 
     file { "set-composer-execute-permissions":
         path => "/usr/local/bin/composer",
-        mode => 755,
+        mode => "0755",
         require => Exec["get-composer"]
     }
 }
