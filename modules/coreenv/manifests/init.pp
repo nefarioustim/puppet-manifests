@@ -1,9 +1,6 @@
 class coreenv {
-    exec { "aptupdate":
-        command => "aptitude update --quiet --assume-yes",
-        user => "root",
-        timeout => 0,
-    }
+    include apt
+
     package { [
             "libffi-dev",
             "python-software-properties",
@@ -13,6 +10,6 @@ class coreenv {
             "curl",
         ]:
         ensure => latest,
-        require => Exec["aptupdate"]
+        require => Class["apt"]
     }
 }
