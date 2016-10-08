@@ -6,17 +6,16 @@ class opensshserver {
     service { "ssh":
         ensure    => running,
         hasstatus => true,
+        subscribe => File["/etc/ssh/sshd_config"],
         require   => Package["openssh-server"],
     }
 
-    augeas { "sshd_config":
-        context => "/files/etc/ssh/sshd_config",
-        changes => [
-            "set PermitRootLogin no",
-            "set RSAAuthentication yes",
-            "set PubkeyAuthentication yes",
-            "set AuthorizedKeysFile %h/.ssh/authorized_keys",
-            "set PasswordAuthentication no"
-        ],
+    file { "/etc/ssh/sshd_config":
+        ensure      => present,
+        owner       => root,
+        group       => root,
+        mode        => "0644",
+        content     => template("opensshserver/sshd_config.erb"),
+        require     => Package["openssh-server"]
     }
 }
