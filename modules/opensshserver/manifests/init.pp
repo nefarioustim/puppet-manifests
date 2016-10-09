@@ -4,10 +4,9 @@ class opensshserver {
     }
 
     service { "ssh":
-        ensure    => running,
-        hasstatus => true,
-        subscribe => File["/etc/ssh/sshd_config"],
-        require   => Package["openssh-server"],
+        ensure      => running,
+        hasstatus   => true,
+        require     => Package["openssh-server"],
     }
 
     file { "/etc/ssh/sshd_config":
@@ -16,6 +15,7 @@ class opensshserver {
         group       => root,
         mode        => "0644",
         content     => template("opensshserver/sshd_config.erb"),
+        notify      => Service["ssh"],
         require     => Package["openssh-server"]
     }
 }
