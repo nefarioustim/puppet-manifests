@@ -1,5 +1,5 @@
-class ssl {
-    class { '::openssl':
+class instassl {
+    class { "openssl":
         package_ensure         => latest,
         ca_certificates_ensure => latest,
     }

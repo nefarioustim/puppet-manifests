@@ -1,4 +1,6 @@
 class nginx($upstream) {
+    include instassl
+
     package { "nginx":
         ensure      => latest,
         require     => Anchor['nginx::apt_repo'],
@@ -29,7 +31,10 @@ class nginx($upstream) {
         mode        => "0644",
         content     => template("nginx/nginx.conf.erb"),
         notify      => Service["nginx"],
-        require     => Package["nginx"]
+        require     => [
+            Class["instassl"],
+            Package["nginx"]
+        ]
     }
 
     file { "/etc/nginx/conf.d/upstream.conf":
