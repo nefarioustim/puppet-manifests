@@ -1,4 +1,4 @@
-class nginx($upstream) {
+class nginx {
     include apt
     include instassl
 
