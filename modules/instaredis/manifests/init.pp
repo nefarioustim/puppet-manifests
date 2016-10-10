@@ -1,9 +1,6 @@
 class instaredis {
-    apt::ppa { "ppa:chris-lea/redis-server": }
-
     package { "redis-server":
-        ensure => latest,
-        require => Apt::Ppa["ppa:chris-lea/redis-server"],
+        ensure => latest
     }
 
     file { "/etc/redis/redis.conf":
