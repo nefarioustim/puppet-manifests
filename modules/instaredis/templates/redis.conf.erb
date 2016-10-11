@@ -12,26 +12,6 @@
 #
 # units are case insensitive so 1GB 1Gb 1gB are all the same.
 
-################################## INCLUDES ###################################
-
-# Include one or more other config files here.  This is useful if you
-# have a standard template that goes to all Redis server but also need
-# to customize a few per-server settings.  Include files can include
-# other files, so use this wisely.
-#
-# Notice option "include" won't be rewritten by command "CONFIG REWRITE"
-# from admin or Redis Sentinel. Since Redis always uses the last processed
-# line as value of a configuration directive, you'd better put includes
-# at the beginning of this file to avoid overwriting config change at runtime.
-#
-# If instead you are interested in using includes to override configuration
-# options, it is better to use include as the last line.
-#
-# include /path/to/local.conf
-# include /path/to/other.conf
-
-################################ GENERAL  #####################################
-
 # By default Redis does not run as a daemon. Use 'yes' if you need it.
 # Note that Redis will write a pid file in /var/run/redis.pid when daemonized.
 daemonize yes
@@ -88,7 +68,7 @@ tcp-keepalive 0
 # warning (only very important / critical messages are logged)
 loglevel notice
 
-# Specify the log file name. Also the empty string can be used to force
+# Specify the log file name. Also the emptry string can be used to force
 # Redis to log on the standard output. Note that if you use standard
 # output for logging but daemonize, logs will be sent to /dev/null
 logfile /var/log/redis/redis-server.log
@@ -108,7 +88,7 @@ logfile /var/log/redis/redis-server.log
 # dbid is a number between 0 and 'databases'-1
 databases 16
 
-################################ SNAPSHOTTING  ################################
+################################ SNAPSHOTTING  #################################
 #
 # Save the DB on disk:
 #
@@ -136,16 +116,16 @@ save 60 10000
 
 # By default Redis will stop accepting writes if RDB snapshots are enabled
 # (at least one save point) and the latest background save failed.
-# This will make the user aware (in a hard way) that data is not persisting
+# This will make the user aware (in an hard way) that data is not persisting
 # on disk properly, otherwise chances are that no one will notice and some
-# disaster will happen.
+# distater will happen.
 #
 # If the background saving process will start working again Redis will
 # automatically allow writes again.
 #
 # However if you have setup your proper monitoring of the Redis server
 # and persistence, you may want to disable this feature so that Redis will
-# continue to work as usual even if there are problems with disk,
+# continue to work as usually even if there are problems with disk,
 # permissions, and so forth.
 stop-writes-on-bgsave-error yes
 
@@ -217,7 +197,7 @@ slave-serve-stale-data yes
 # Note: read only slaves are not designed to be exposed to untrusted clients
 # on the internet. It's just a protection layer against misuse of the instance.
 # Still a read only slave exports by default all the administrative commands
-# such as CONFIG, DEBUG, and so forth. To a limited extent you can improve
+# such as CONFIG, DEBUG, and so forth. To a limited extend you can improve
 # security of read only slaves using 'rename-command' to shadow all the
 # administrative / dangerous commands.
 slave-read-only yes
@@ -283,7 +263,7 @@ repl-disable-tcp-nodelay no
 #
 # A slave with a low priority number is considered better for promotion, so
 # for instance if there are three slaves with priority 10, 100, 25 Sentinel will
-# pick the one with priority 10, that is the lowest.
+# pick the one wtih priority 10, that is the lowest.
 #
 # However a special priority of 0 marks the slave as not able to perform the
 # role of master, so a slave with priority of 0 will never be selected by
@@ -363,7 +343,7 @@ slave-priority 100
 
 # Don't use more memory than the specified amount of bytes.
 # When the memory limit is reached Redis will try to remove keys
-# according to the eviction policy selected (see maxmemory-policy).
+# accordingly to the eviction policy selected (see maxmemmory-policy).
 #
 # If Redis can't remove keys according to the policy, or if the policy is
 # set to 'noeviction', Redis will start to reply with errors to commands
@@ -371,7 +351,7 @@ slave-priority 100
 # to reply to read-only commands like GET.
 #
 # This option is usually useful when using Redis as an LRU cache, or to set
-# a hard memory limit for an instance (using the 'noeviction' policy).
+# an hard memory limit for an instance (using the 'noeviction' policy).
 #
 # WARNING: If you have slaves attached to an instance with maxmemory on,
 # the size of the output buffers needed to feed the slaves are subtracted
@@ -440,8 +420,7 @@ slave-priority 100
 appendonly yes
 
 # The name of the append only file (default: "appendonly.aof")
-
-appendfilename "appendonly.aof"
+# appendfilename appendonly.aof
 
 # The fsync() call tells the Operating System to actually write data on disk
 # instead to wait for more data in the output buffer. Some OS will really flush
@@ -488,7 +467,6 @@ appendfsync everysec
 #
 # If you have latency problems turn this to "yes". Otherwise leave it as
 # "no" that is the safest pick from the point of view of durability.
-
 no-appendfsync-on-rewrite no
 
 # Automatic rewrite of the append only file.
@@ -629,7 +607,7 @@ zset-max-ziplist-value 64
 # Active rehashing uses 1 millisecond every 100 milliseconds of CPU time in
 # order to help rehashing the main Redis hash table (the one mapping top-level
 # keys to values). The hash table implementation Redis uses (see dict.c)
-# performs a lazy rehashing: the more operation you run into a hash table
+# performs a lazy rehashing: the more operation you run into an hash table
 # that is rehashing, the more rehashing "steps" are performed, so if the
 # server is idle the rehashing is never complete and some more memory is used
 # by the hash table.
@@ -655,7 +633,7 @@ activerehashing yes
 #
 # normal -> normal clients
 # slave  -> slave clients and MONITOR clients
-# pubsub -> clients subscribed to at least one pubsub channel or pattern
+# pubsub -> clients subcribed to at least one pubsub channel or pattern
 #
 # The syntax of every client-output-buffer-limit directive is the following:
 #
@@ -684,7 +662,7 @@ client-output-buffer-limit slave 256mb 64mb 60
 client-output-buffer-limit pubsub 32mb 8mb 60
 
 # Redis calls an internal function to perform many background tasks, like
-# closing connections of clients in timeout, purging expired keys that are
+# closing connections of clients in timeot, purging expired keys that are
 # never requested, and so forth.
 #
 # Not all tasks are performed with the same frequency, but Redis checks for
@@ -705,3 +683,13 @@ hz 10
 # in order to commit the file to the disk more incrementally and avoid
 # big latency spikes.
 aof-rewrite-incremental-fsync yes
+
+################################## INCLUDES ###################################
+
+# Include one or more other config files here.  This is useful if you
+# have a standard template that goes to all Redis server but also need
+# to customize a few per-server settings.  Include files can include
+# other files, so use this wisely.
+#
+# include /path/to/local.conf
+# include /path/to/other.conf
