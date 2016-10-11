@@ -1,29 +1,20 @@
 class python::supervisor {
-    package { 'supervisor':
-        ensure => latest,
-        provider => pip,
-        require => Package['python-pip'],
+    package { "supervisor":
+        ensure      => latest
     }
-    file { "/etc/supervisor.d":
-        ensure => directory,
-        owner => root,
-        group => root,
-        mode => "0655",
+
+    file { "/etc/supervisor/supervisord.conf":
+        owner       => root,
+        group       => root,
+        mode        => "0644",
+        source      => "python/supervisord.conf",
+        require     => Package["supervisor"],
+        notify      => Service["supervisor"]
     }
-    file { "/etc/supervisord.conf":
-        owner  => root,
-        group  => root,
-        mode   => "0644",
-        source => "puppet:///modules/python/supervisord.conf",
-    }
-    file { "/etc/init.d/supervisord":
-        owner  => root,
-        group  => root,
-        mode   => "0655",
-        source => "puppet:///modules/python/supervisord.initd",
-    }
-    service { "supervisord":
-        ensure => stopped,
-        hasrestart => true,
+
+    service { "supervisor":
+        ensure      => running,
+        subscribe   => File["/etc/supervisor/supervisord.conf"],
+        require     => Package["supervisor"]
     }
 }
