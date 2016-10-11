@@ -7,7 +7,7 @@ class python::supervisor {
         owner       => root,
         group       => root,
         mode        => "0644",
-        source      => "python/supervisord.conf",
+        source      => "puppet:///modules/python/supervisord.conf",
         require     => Package["supervisor"],
         notify      => Service["supervisor"]
     }
