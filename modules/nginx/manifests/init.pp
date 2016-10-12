@@ -27,6 +27,20 @@ class nginx {
         ]
     }
 
+    file { "nginx-monit-conf-dir":
+        path        => "/etc/monit/conf.d",
+        ensure      => 'directory',
+        mode        => '0755',
+    }
+
+    file { "/etc/monit/conf.d/nginx":
+        owner       => root,
+        group       => root,
+        mode        => "0644",
+        content     => template("nginx/nginx.monit.erb"),
+        require     => File["nginx-monit-conf-dir"]
+    }
+
     file { "/etc/nginx/conf.d/default.conf":
         ensure      => absent,
         notify      => Service["nginx"],
