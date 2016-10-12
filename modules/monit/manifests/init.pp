@@ -6,7 +6,7 @@ class monit {
     file { "/etc/monit/monitrc":
         owner       => root,
         group       => root,
-        mode        => "0644",
+        mode        => "0700",
         content     => template("monit/monitrc.erb"),
         notify      => Service["monit"],
         require     => Package["monit"]
