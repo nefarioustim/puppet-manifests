@@ -8,6 +8,7 @@ class coreenv {
             "tmux",
             "vim",
             "curl",
+            "ufw"
         ]:
         ensure => latest,
         require => Class["apt"]
