@@ -1,10 +1,17 @@
 class libxml {
-    package { [
-            "libxml2",
-            "libxslt1.1",
-            "libxml2-dev",
-            "libxslt-dev",
-        ]:
+    package { "libxml2":
+        ensure => latest,
+    }
+
+    package { "libxslt1.1":
+        ensure => latest,
+    }
+
+    package { "libxml2-dev":
+        ensure => latest,
+    }
+
+    package { "libxslt-dev":
         ensure => latest,
     }
 }
