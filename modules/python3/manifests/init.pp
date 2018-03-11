@@ -1,5 +1,8 @@
 class python3 {
     package { [
+            'python',
+            'python-dev',
+            'python-pip',
             'python3',
             'python3-dev',
             'python3-pip'
@@ -11,6 +14,6 @@ class python3 {
         ]:
         ensure => latest,
         provider => pip3,
-        require => Package['python3-pip'],
+        require => Package['python3-pip', 'python-pip'],
     }
 }
