@@ -10,7 +10,7 @@ class python3 {
             'pipenv'
         ]:
         ensure => latest,
-        provider => pip,
+        provider => pip3,
         require => Package['python3-pip'],
     }
 }
